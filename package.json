@@ -1,0 +1,20 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "description": "typescript test project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "youzi",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.21.1",
+    "eslint-plugin-typescript": "^0.14.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5",
+    "typescript-eslint-parser": "^22.0.0"
+  }
+}
