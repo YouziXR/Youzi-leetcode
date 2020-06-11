@@ -1,3 +1,4 @@
+"use strict";
 /*
  * app=leetcode.cn id=2 lang=javascript
  *
@@ -11,14 +12,13 @@
  * }
  */
 // console.dir(l1);
-var ListNode = /** @class */ (function () {
-    function ListNode(val) {
+class ListNode {
+    constructor(val) {
         this.val = val;
         this.next = null;
     }
-    return ListNode;
-}());
-var l1 = {
+}
+let l1 = {
     val: 2,
     next: {
         val: 4,
@@ -28,7 +28,7 @@ var l1 = {
         }
     }
 };
-var l2 = {
+let l2 = {
     val: 5,
     next: {
         val: 6,
@@ -39,13 +39,13 @@ var l2 = {
     }
 };
 var addTwoNumbers = function (l1, l2) {
-    var tmp = 0;
-    var head = {
+    let tmp = 0;
+    let head = {
         next: null
     };
-    var p = head;
+    let p = head;
     while (l1 || l2 || tmp) {
-        var val1 = 0, val2 = 0;
+        let val1 = 0, val2 = 0;
         if (l1) {
             val1 = l1.val;
             l1 = l1.next;
@@ -54,9 +54,9 @@ var addTwoNumbers = function (l1, l2) {
             val2 = l2.val;
             l2 = l2.next;
         }
-        var target = (val1 + val2 + tmp) % 10;
+        let target = (val1 + val2 + tmp) % 10;
         tmp = val1 + val2 + tmp > 9 ? 1 : 0;
-        var n = new ListNode(target);
+        let n = new ListNode(target);
         p.next = n;
         p = p.next;
     }

@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=5 lang=javascript
+ * app=leetcode.cn id=5 lang=javascript
  *
  * [5] 最长回文子串
  */
@@ -9,10 +9,10 @@
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function (s) {
-  let arr = s.split('');
-  let p = [];
-  let res = [0, -1];
+var longestPalindrome = function (s: string): string {
+  let arr: string[] = s.split('');
+  let p: boolean[][] = [];
+  let res: number[] = [0, -1];
   for (let i = arr.length - 1; i >= 0; i--) {
     const ci = arr[i];
     p[i] = [];
@@ -36,4 +36,5 @@ var longestPalindrome = function (s) {
   }
   return arr.slice(res[0], res[1] + 1).join('');
 };
+console.log(longestPalindrome('cbbd'));
 // @lc code=end
