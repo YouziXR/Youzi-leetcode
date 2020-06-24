@@ -12,7 +12,32 @@
 var threeSum = function (nums) {
   quickSort(nums);
   let res = [];
-  let map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const a = nums[i];
+    if (i > 0 && a === nums[i - 1]) {
+      continue;
+    }
+    let target = -a;
+    let k = nums.length - 1;
+    for (let j = i + 1; j < nums.length; j++) {
+      const b = nums[j];
+      if (j !== i + 1 && b === nums[j - 1]) {
+        continue;
+      }
+      while (k > j && b + nums[k] > target) {
+        k--;
+      }
+      if (k === j) {
+        break;
+      }
+      if (b + nums[k] === target) {
+        let tmpArr = [];
+        tmpArr.push(a, b, nums[k]);
+        res.push(tmpArr);
+      }
+    }
+  }
+  /* let map = new Map();
   for (const el of nums) {
     if (!map.has(el)) {
       map.set(el, 1);
@@ -39,9 +64,10 @@ var threeSum = function (nums) {
         res.push(arr);
       }
     }
-  }
+  } */
   return res;
 };
+
 const quickSort = arr => {
   const sort = (array, left, right) => {
     if (left >= right) {
@@ -69,4 +95,6 @@ const quickSort = arr => {
   sort(arr, 0, arr.length - 1);
   return arr;
 };
+// console.warn(threeSum([-1, 0, 1, 2, -1, -4]));
+
 // @lc code=end

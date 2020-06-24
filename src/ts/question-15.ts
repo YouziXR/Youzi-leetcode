@@ -12,7 +12,34 @@
 var threeSum = function (nums: number[]): number[][] {
   quickSort(nums);
   let res: number[][] = [];
-  let map = new Map<number, number>();
+  // 双指针
+  for (let i = 0; i < nums.length; i++) {
+    const a = nums[i];
+    if (i > 0 && a === nums[i - 1]) {
+      continue;
+    }
+    let target = -a;
+    let k = nums.length - 1;
+    for (let j = i + 1; j < nums.length; j++) {
+      const b = nums[j];
+      if (j !== i + 1 && b === nums[j - 1]) {
+        continue;
+      }
+      while (k > j && b + nums[k] > target) {
+        k--;
+      }
+      if (k === j) {
+        break;
+      }
+      if (b + nums[k] === target) {
+        let tmpArr = [];
+        tmpArr.push(a, b, nums[k]);
+        res.push(tmpArr);
+      }
+    }
+  }
+  // hashMap加双循环
+  /* let map = new Map<number, number>();
   for (const el of nums) {
     if (!map.has(el)) {
       map.set(el, 1);
@@ -39,7 +66,7 @@ var threeSum = function (nums: number[]): number[][] {
         res.push(arr);
       }
     }
-  }
+  } */
   return res;
 };
 
@@ -72,5 +99,5 @@ const quickSort = (arr: number[]) => {
 };
 
 console.warn(threeSum([-1, 0, 1, 2, -1, -4]));
-
+export { threeSum };
 // @lc code=end

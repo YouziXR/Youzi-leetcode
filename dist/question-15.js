@@ -4,6 +4,8 @@
  *
  * [15] 三数之和
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.threeSum = void 0;
 // @lc code=start
 /**
  * @param {number[]} nums
@@ -12,39 +14,64 @@
 var threeSum = function (nums) {
     quickSort(nums);
     let res = [];
-    let map = new Map();
-    for (const el of nums) {
-        if (!map.has(el)) {
-            map.set(el, 1);
-        }
-        else {
-            map.set(el, map.get(el) + 1);
-        }
-    }
+    // 双指针
     for (let i = 0; i < nums.length; i++) {
-        const e1 = nums[i];
-        if (i !== 0 && e1 === nums[i - 1])
+        const a = nums[i];
+        if (i > 0 && a === nums[i - 1]) {
             continue;
+        }
+        let target = -a;
+        let k = nums.length - 1;
         for (let j = i + 1; j < nums.length; j++) {
-            const e2 = nums[j];
-            if (j !== i + 1 && e2 === nums[j - 1])
+            const b = nums[j];
+            if (j !== i + 1 && b === nums[j - 1]) {
                 continue;
-            let tmp = -e1 - e2;
-            if (map.has(tmp) && tmp >= e2) {
-                let r = map.get(tmp);
-                if (e1 === 0 && e2 === 0 && r < 3) {
-                    continue;
-                }
-                if (e2 === tmp && r < 2) {
-                    continue;
-                }
-                let arr = [e1, e2, tmp];
-                res.push(arr);
+            }
+            while (k > j && b + nums[k] > target) {
+                k--;
+            }
+            if (k === j) {
+                break;
+            }
+            if (b + nums[k] === target) {
+                let tmpArr = [];
+                tmpArr.push(a, b, nums[k]);
+                res.push(tmpArr);
             }
         }
     }
+    // hashMap加双循环
+    /* let map = new Map<number, number>();
+    for (const el of nums) {
+      if (!map.has(el)) {
+        map.set(el, 1);
+      } else {
+        map.set(el, (map.get(el) as number) + 1);
+      }
+    }
+    for (let i = 0; i < nums.length; i++) {
+      const e1 = nums[i];
+      if (i !== 0 && e1 === nums[i - 1]) continue;
+      for (let j = i + 1; j < nums.length; j++) {
+        const e2 = nums[j];
+        if (j !== i + 1 && e2 === nums[j - 1]) continue;
+        let tmp = -e1 - e2;
+        if (map.has(tmp) && tmp >= e2) {
+          let r: number = map.get(tmp) as number;
+          if (e1 === 0 && e2 === 0 && r < 3) {
+            continue;
+          }
+          if (e2 === tmp && r < 2) {
+            continue;
+          }
+          let arr = [e1, e2, tmp];
+          res.push(arr);
+        }
+      }
+    } */
     return res;
 };
+exports.threeSum = threeSum;
 const quickSort = (arr) => {
     const sort = (array, left, right) => {
         if (left >= right) {
